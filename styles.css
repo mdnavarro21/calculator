@@ -33,6 +33,10 @@
 	margin: auto;
 }
 
+.selected {
+    background-color: lightcyan;
+}
+
 button {
     border-radius:5px;
     font-size:2vw;

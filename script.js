@@ -20,6 +20,8 @@ for (let i = 0; i < 4; i++)
     operator.style.cssText = `grid-area: ${operator_id[i]}`
     container.appendChild(operator);
 }
+
+
 //creates all variables needed in operation
 let display_value = '', number1, number2, symbol;
 const display = document.querySelector(".display");
@@ -43,8 +45,11 @@ decimal.addEventListener("click", () => {
     decimal.disabled = true;
 });
 //stores first number and operator in variables; evaluates if there is already an operation
+
 operators.forEach(button => {
     button.addEventListener("click", () => {
+        removeClasses(operators);
+        
         if(number1 && symbol && (display_value !== ''))
         {
             getResults();
@@ -53,14 +58,18 @@ operators.forEach(button => {
         {
             number1 = display_value;
         }
-        
-
+        button.classList.add("selected");
         symbol = button.textContent;
         decimal.disabled = false;
         display_value = '';
         
     });
 });
+function removeClasses(btns) {
+    btns.forEach((btn) => {
+      btn.classList.remove("selected");
+    });
+  }
 
 //evaluates operation when equals sign is clicked
 const equals = document.querySelector(".equals");
@@ -84,6 +93,7 @@ function getResults(){
     number2 = undefined;
     symbol = undefined;
     decimal.disabled = false;
+    removeClasses(operators);
 }
 
 //resets all variables when clear is clicked
